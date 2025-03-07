@@ -40,3 +40,6 @@ def contagem_de_base(fita):
     return resultado
 
 print(contagem_de_base('AATGCCGT'))
+
+#%%
+
