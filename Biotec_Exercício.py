@@ -27,59 +27,6 @@ print(complementoDNA('ATCG'))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #%%
 #Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
 

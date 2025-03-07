@@ -19,3 +19,6 @@ def complemento_fita(fita):
 
 
 print(complemento_fita(input("Digite uma sequência de bases nitrogenadas: ")))
+
+#%%
+#Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
