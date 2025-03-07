@@ -18,7 +18,4 @@ def complemento_fita(fita):
     return complemento
 
 
-print(complemento_fita("atcg"))
-print(complemento_fita("AUCG"))
-print(complemento_fita("ATXG"))
-print(complemento_fita("ATCGTAC"))
+print(complemento_fita(input("Digite uma sequência de bases nitrogenadas: ")))
