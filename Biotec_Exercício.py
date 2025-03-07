@@ -30,6 +30,44 @@ print(complementoDNA('ATCG'))
 #%%
 #Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
 
+def contagem_de_base(fita):
+    fita = fita.upper()
+    Adenosina = 0
+    Timina = 0
+    Guanina = 0
+    Citosina = 0
+    Uracila = 0
+
+    bases_validas = {'A', 'T', 'C', 'G', 'U'}
+    bases_invalidas = set(fita) - bases_validas
+    if bases_invalidas:
+        return f'verifique novamente a sequencia de bases nitrogenadas pois {', '. join(bases_invalidas)} não é uma base nitrogenada'
+    
+    for n in fita:
+        if n == 'A':
+            Adenosina += 1
+        elif n == 'T':
+            Timina += 1
+        elif n == 'G':
+            Guanina += 1
+        elif n == 'C':
+            Citosina += 1
+        elif n == 'U':
+            Uracila += 1
+    return f'''Adenosina: {Adenosina}
+Timina: {Timina}
+Guanina: {Guanina}
+Citosina: {Citosina}
+Uracila: {Uracila}
+'''
+
+print(contagem_de_base('AATGCCGT'))
+
+
+
+
+
+
 
 #%%
 #Transforme uma sequência de DNA em RNA substituindo T por U.
