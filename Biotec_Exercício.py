@@ -98,7 +98,7 @@ def ConverterNA(fita):
                 lista.append(n)
     return lista
 
-pprint(ConverterNA("ATCG"))  
+print(ConverterNA("ATCG"))  
 print(ConverterNA("AUGC"))  
 print(ConverterNA("ATXG"))
 
