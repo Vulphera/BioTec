@@ -45,6 +45,7 @@ print(contagem_de_base('AATGCCGT'))
 
 #%%
 
+#Transforme uma sequência de DNA em RNA substituindo T por U.
 def ConverterNA(fita):
     fita = fita.upper()
     bases_validas = {'A', 'T', 'C', 'G', 'U'}

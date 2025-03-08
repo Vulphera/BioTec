@@ -1,114 +1,57 @@
 #%%
-#Escreva um programa que recebe uma sequência de DNA e retorna o fio complementar (A ↔ T, C ↔ G).
-
-
-def complementoDNA(fita):
-    fita = fita.upper()
-    complemento = []
-    base = 0
-    for n in fita:
-        base += 1
-        if n == 'A':
-            complemento.append('T')
-        elif n == 'T':
-            complemento.append('A')
-        elif n == 'C':
-            complemento.append('G')
-        elif n == 'G':
-            complemento.append('C')
-        elif n == 'U':
-            return 'A fita apresentada é parte de um RNA'
+class LeitorNA:
+    def __init__(self, fita):
+    
+        self.fita = fita.upper()
+        self.contagem = {'A': 0, 'T': 0, 'G': 0, 'C': 0, 'U': 0}
+        erro = self.validar_fita()
+        if erro:
+            self.erro = erro
         else:
-            return f'A base nitrogenada {n} foi digitada de forma errada, por favor verifique: a base {base} '
-            #futuramente inserir qual das bases foi digitada de forma errada
-    return ''.join(complemento)
+            self.erro = None
 
-print(complementoDNA("ATCG"))  
-print(complementoDNA("AUGC"))  
-print(complementoDNA("ATXG"))
-
-
-
-#%%
-#Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
-
-def contagem_de_base(fita):
-    fita = fita.upper()
-    Adenosina = 0
-    Timina = 0
-    Guanina = 0
-    Citosina = 0
-    Uracila = 0
-
-    bases_validas = {'A', 'T', 'C', 'G', 'U'}
-    bases_invalidas = set(fita) - bases_validas
-    if bases_invalidas:
-        return f'verifique novamente a sequencia de bases nitrogenadas pois {', '. join(bases_invalidas)} não é uma base nitrogenada'
+    def validar_fita(self):
+        fita = self.fita
+        bases_validas = {'A', 'T', 'C', 'G', 'U'}
+        bases_invalidas = set(fita) - bases_validas
+        if bases_invalidas:
+            return(f"Verifique novamente a sequência de bases nitrogenadas, pois {', '.join(bases_invalidas)} não é uma base válida.")
     
-    for n in fita:
-        if n == 'A':
-            Adenosina += 1
-        elif n == 'T':
-            Timina += 1
-        elif n == 'G':
-            Guanina += 1
-        elif n == 'C':
-            Citosina += 1
-        elif n == 'U':
-            Uracila += 1
-    return f'''Adenosina: {Adenosina}
-Timina: {Timina}
-Guanina: {Guanina}
-Citosina: {Citosina}
-Uracila: {Uracila}
-'''
-
-print(contagem_de_base('AATGCCGT'))
+        elif {'T', 'U'}.issubset(fita):
+            return ValueError("Algo está errado, pois a fita contém tanto Timina (T) quanto Uracila (U). Logo, não pode ser nem DNA nem RNA.")
 
 
+    #Escreva um programa que recebe uma sequência de DNA e retorna o fio complementar (A ↔ T, C ↔ G).
+    def complementoDNA(self):
+        if self.erro:
+            return self.erro
+        pares = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+        complemento = ''.join(pares[n] for n in self.fita)
 
-
-
-
-
-#%%
-#Transforme uma sequência de DNA em RNA substituindo T por U.
-
-def ConverterNA(fita):
-    fita = fita.upper()
-    bases_validas = {'A', 'T', 'G', 'C', 'U'}
-    bases_invalidas = set(fita) - bases_validas
-
-    lista = []
-
-    if bases_invalidas:
-        return f'verifique novamente a sequencia de bases nitrogenadas pois {', '. join(bases_invalidas)} não é uma base nitrogenada'
+        return complemento
     
-    if 'T' in fita and 'U' in fita:
-        return 'Algo está errado pois existem ambas Timina e Uracila nesta fita, logo não é nem DNA ou RNA'
-    
-    if 'T' in fita:
-        for n in fita:
-            if n == 'T':
-                lista.append('U')
-            else:
-                lista.append(n)
-    else:
-        for n in fita:
-            if n == 'U':
-                lista.append('T')
-            else:
-                lista.append(n)
-    return lista
-
-print(ConverterNA("ATCG"))  
-print(ConverterNA("AUGC"))  
-print(ConverterNA("ATXG"))
-
-
-
-
-
+    #Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
+    def contagem_de_base(self, format = False):
+        if self.erro:
+            return self.erro
+        
+        if format:
+            return '\n'.join(f'{base}: {self.contagem[base]}' for base in self.contagem)
+        else:
+            for n in self.fita:
+                self.contagem[n] += 1
+            return self.contagem
+            
+    #Transforme uma sequência de DNA em RNA substituindo T por U.
+    def ConverterNA(self):
+        if self.erro:
+            return self.erro
+        if 'T' in self.fita:
+            resultado = ''.join('U' if n == 'T' else n for n in self.fita)
+        if 'U' in self.fita:
+            resultado = ''.join('T' if n == 'U' else n for n in self.fita)
+        
+        return resultado
 
 #%%
 #A proporção GC indica a quantidade de Guanina (G) e Citosina (C) em relação ao tamanho total da sequência.
@@ -137,4 +80,9 @@ print(propGC("ATCGGC"))
 #Os códons de início e fim são fundamentais na tradução do RNA em proteínas. No DNA, o códon de início é sempre ATG, enquanto os códons de parada podem ser TAA, TAG ou TGA.
 #Crie um programa que identifique onde um gene começa e onde ele termina em uma sequência de DNA.
 
-
+#%%
+fita = LeitorNA("AATGCCTG")
+print(fita.complementoDNA())
+print(fita.contagem_de_base())
+print(fita.contagem_de_base(format = True))
+print(fita.ConverterNA())
