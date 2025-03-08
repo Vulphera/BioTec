@@ -53,29 +53,16 @@ class LeitorNA:
         
         return resultado
 
-#%%
-#A proporção GC indica a quantidade de Guanina (G) e Citosina (C) em relação ao tamanho total da sequência.
+    #A proporção GC indica a quantidade de Guanina (G) e Citosina (C) em relação ao tamanho total da sequência.
+    def propGC(self):
 
-def propGC(fita):
-    fita = fita.upper()
-    bases_validas = {'A', 'T', 'G', 'C', 'U'}
-    bases_invalidas = set(fita) - bases_validas
-    if bases_invalidas:
-        return f'verifique novamente a sequencia de bases nitrogenadas pois {', '. join(bases_invalidas)} não é uma base nitrogenada'
-    
-    if {'T', 'U'}.issubset(fita):
-        return 'Algo está errado pois existem ambas Timina e Uracila nesta fita, logo não é nem DNA nem RNA'
-    
-    contagem = {'A': 0, 'T': 0, 'G': 0, 'C': 0, 'U': 0}
+        gc_total = sum(self.fita.count(base) for base in 'GC')
+        total = len(self.fita)
 
-    for n in fita:
-        contagem[n] += 1
-        
+        proportionGC = (gc_total / total) * 100
+        return f'{proportionGC:.3f} '
 
-    proportionGC = ((contagem['G'] + contagem['C']) / (sum(contagem.values()))) * 100
-    return f'{proportionGC:.3f} '
 
-print(propGC("ATCGGC"))
 # %%
 #Os códons de início e fim são fundamentais na tradução do RNA em proteínas. No DNA, o códon de início é sempre ATG, enquanto os códons de parada podem ser TAA, TAG ou TGA.
 #Crie um programa que identifique onde um gene começa e onde ele termina em uma sequência de DNA.
@@ -86,3 +73,4 @@ print(fita.complementoDNA())
 print(fita.contagem_de_base())
 print(fita.contagem_de_base(format = True))
 print(fita.ConverterNA())
+print(fita.propGC())
