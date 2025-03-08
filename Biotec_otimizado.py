@@ -18,7 +18,9 @@ def complemento_fita(fita):
     return complemento
 
 
-print(complemento_fita(input("Digite uma sequência de bases nitrogenadas: ")))
+print(complemento_fita("ATCG"))  
+print(complemento_fita("AUGC"))  
+print(complemento_fita("ATXG"))
 
 #%%
 #Crie um programa que recebe uma sequência de DNA e retorna a contagem de cada base nitrogenada.
@@ -42,4 +44,26 @@ def contagem_de_base(fita):
 print(contagem_de_base('AATGCCGT'))
 
 #%%
+
+def ConverterNA(fita):
+    fita = fita.upper()
+    bases_validas = {'A', 'T', 'C', 'G', 'U'}
+    bases_invalidas = set(fita) - bases_validas
+
+    if bases_invalidas:
+        return f'Verifique novamente a sequencia de bases nitrogenadas pois {', '.join(bases_invalidas)} não é uma base nitrogenada'
+    
+    if 'T' in fita:
+        resultado = ''.join('U' if n == 'T' else n for n in fita)
+    else:
+        resultado = ''.join('T' if n == 'U' else n for n in fita)
+
+    return resultado
+
+print(ConverterNA("ATCG"))  
+print(ConverterNA("AUGC"))  
+print(ConverterNA("ATXG"))
+
+# %%
+
 
