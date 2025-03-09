@@ -88,7 +88,7 @@ def propGC(fita):
     proportion_gc = (qtd_gc/total)*100
     return f'{proportion_gc:.3f}'
 
-print(propGC("ATCGGC"))
+print(propGC("AATGCCTG"))
 
 
 # %%
