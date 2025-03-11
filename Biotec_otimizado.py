@@ -45,6 +45,7 @@ print(contagem_de_base('AATGCCGT'))
 
 #%%
 
+#Transforme uma sequência de DNA em RNA substituindo T por U.
 def ConverterNA(fita):
     fita = fita.upper()
     bases_validas = {'A', 'T', 'C', 'G', 'U'}
@@ -87,7 +88,7 @@ def propGC(fita):
     proportion_gc = (qtd_gc/total)*100
     return f'{proportion_gc:.3f}'
 
-print(propGC("ATCGGC"))
+print(propGC("AATGCCTG"))
 
 
 # %%
