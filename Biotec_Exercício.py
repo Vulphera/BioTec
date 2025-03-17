@@ -20,7 +20,6 @@ class LeitorNA:
         elif {'T', 'U'}.issubset(fita):
             return ValueError("Algo está errado, pois a fita contém tanto Timina (T) quanto Uracila (U). Logo, não pode ser nem DNA nem RNA.")
 
-
     #Escreva um programa que recebe uma sequência de DNA e retorna o fio complementar (A ↔ T, C ↔ G).
     def complementoDNA(self, format = False):
         if self.erro:
@@ -28,7 +27,6 @@ class LeitorNA:
         pares = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
         complemento = f'Fio principal:{self.fita}\nFio complementar:'if format else ''
         complemento += ''.join(pares[n] for n in self.fita)
-        
         
         return complemento
     
@@ -70,8 +68,8 @@ class LeitorNA:
         return f'{proportionGC:.3f} '
 
 
-#Os códons de início e fim são fundamentais na tradução do RNA em proteínas. No DNA, o códon de início é sempre ATG, enquanto os códons de parada podem ser TAA, TAG ou TGA.
-#Crie um programa que identifique onde um gene começa e onde ele termina em uma sequência de DNA.
+    #Os códons de início e fim são fundamentais na tradução do RNA em proteínas. No DNA, o códon de início é sempre ATG, enquanto os códons de parada podem ser TAA, TAG ou TGA.
+    #Crie um programa que identifique onde um gene começa e onde ele termina em uma sequência de DNA.
     def find_codon(self):
         if self.erro:
             return self.erro
@@ -83,9 +81,9 @@ class LeitorNA:
         for cod in range(len(self.fita) - 2):
             trecho = self.fita[cod:cod+3]
             if trecho == codon_inicio:
-                codons.append(f'Códon de início na posição {cod}')
+                codons.append(f'Códon de início na posição {cod+1}')
             elif trecho in codon_fim:
-                codons.append(f'Códon de parada na posição {cod}')
+                codons.append(f'Códon de parada na posição {cod+1}')
 
         return '\n'.join(codons) if codons else 'nenhum códon encontrado'
    
