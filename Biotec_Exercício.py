@@ -81,9 +81,9 @@ class LeitorNA:
         for cod in range(len(self.fita) - 2):
             trecho = self.fita[cod:cod+3]
             if trecho == codon_inicio:
-                codons.append(f'Códon de início na posição {cod+1}')
+                codons.append(f'\033[32mPossível códon de início na posição: {cod+1}\033[m')
             elif trecho in codon_fim:
-                codons.append(f'Códon de parada na posição {cod+1}')
+                codons.append(f'\033[31mPossível códon de parada na posição: {cod+1}\033[m')
 
         return '\n'.join(codons) if codons else 'nenhum códon encontrado'
    
